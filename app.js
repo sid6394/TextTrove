@@ -129,41 +129,40 @@ app.get("/", async (req, res) => {
 app.get("/signup", (req, res) => res.render("signup.ejs"));
 app.get("/login", (req, res) => res.render("login.ejs"));
 // Register route
-app.post('/signup', [
-    body('username').not().isEmpty().withMessage('Username is required'),
-    body('email').isEmail().withMessage('Email is invalid'),
-    body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long')
-], async (req, res) => {
+app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
     try {
       let user = await User.findOne({ email });
       if (user) {
-        return res.status(400).json({ msg: 'Email already exists' });
+        req.flash('error', 'Email already exists');
+        return res.redirect('/signup');
       }
       
       // Ensure that only the seed script creates an admin account
       if (email === 'admin@texttrove.in') {
-        return res.status(400).json({ msg: 'Cannot create admin account through this route' });
+        req.flash('error', 'Cannot create admin account through this route');
+        return res.redirect('/signup');
       }
       
       user = new User({ username, email, role: 'user' });
       await User.register(user, password);
-      res.json({ msg: 'User registered successfully' });
+      req.flash('success', 'Account created successfully! Please login.');
+      res.redirect('/login');
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error');
+      req.flash('error', err.message || 'Server error during registration');
+      res.redirect('/signup');
     }
   });
 
-/// app.js
+// Login Route
 app.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, user, info) => {
       if (err) { return next(err); }
       if (!user) { 
-        res.json('message: User not found');
+        req.flash('error', (info && info.message) ? info.message : 'Invalid email or password');
         return res.redirect('/login');
-       
-    }
+      }
   
       req.logIn(user, (err) => {
         if (err) { return next(err); }

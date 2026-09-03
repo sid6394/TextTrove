@@ -229,6 +229,16 @@ li ul {
 
   <div class="signup-container">
     <h2>Create an Account</h2>
+    <% if (error && error.length > 0) { %>
+      <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center; font-size: 0.9rem;">
+        <%= error %>
+      </div>
+    <% } %>
+    <% if (success && success.length > 0) { %>
+      <div style="background-color: #d4edda; color: #155724; padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center; font-size: 0.9rem;">
+        <%= success %>
+      </div>
+    <% } %>
     <form id="signupForm" method="post" action="/signup">
       <!-- Email Field -->
       <div class="form-group">
