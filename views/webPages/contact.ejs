@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - TextTrove</title>
+  <link rel="icon" type="image/png" href="TextTrove_Final.png">
+
+  <style>
+        /* Basic Reset */
+        * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f7f8fc;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
+    }
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #4a90e2;
+      padding: 15px 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .navbar .logo a {
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .navbar .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    .navbar .nav-links li a {
+      color: #fff;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .navbar .nav-links li a:hover {
+      color: #ffdf5c;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      color: #4a90e2;
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, textarea {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    input[type="submit"] {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #357ABD;
+    }
+    .form-info {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+    }
+
+     /* Categories Section */
+     .categories {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      text-align: center;
+    }
+    .category {
+      flex: 1;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .category img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 15px;
+    }
+    .category h2 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .category p {
+      color: #666;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #4a90e2;
+      color: #fff;
+      margin-top: 30px;
+    }
+  /* Footer */
+ footer {
+      background-color: #222;
+      color: #f4f4f9;
+      padding: 40px 20px;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+    .footer-brand, .footer-links, .footer-social, .footer-contact {
+      flex: 1;
+      min-width: 220px;
+    }
+    .footer-brand h2, .footer-links h3, .footer-social h3, .footer-contact h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #ffdf5c;
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #f4f4f9;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .footer-links a:hover {
+      color: #ffdf5c;
+    }
+    .social-icons a {
+      margin-right: 15px;
+      transition: transform 0.3s;
+    }
+    .social-icons img {
+      width: 28px;
+      height: 28px;
+    }
+    .social-icons a:hover img {
+      transform: scale(1.2);
+    }
+    .footer-contact p {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin: 5px 0;
+    }
+    .footer-contact a {
+      color: #ffdf5c;
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+      <nav class="navbar">
+        <div class="logo"><a href="/">TextTrove</a></div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/quotes">Quotes</a></li>
+          <li><a href="/books">Books</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/signup">Sign Up</a></li>
+          <li><a href="/login">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+    <br>
+  <div class="container">
+    <h1>Contact Us</h1>
+    <p class="form-info">Have questions or need assistance? Fill out the form below, and we'll get back to you as soon as possible.</p>
+    <form action="/contact" method="POST">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required placeholder="Your Full Name">
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required placeholder="Your Email Address">
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Your Message"></textarea>
+
+      <input type="submit" value="Send Message">
+    </form>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <!-- Brand and Description -->
+      <div class="footer-brand">
+        <h2>TextTrove</h2>
+        <p>Your gateway to knowledge, insights, and inspiration. Explore quotes, books, and articles from a world of creators.</p>
+      </div>
+  
+      <!-- Navigation Links -->
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/quotes">Quotes</a></li>
+          <li><a href="/books">Books</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/terms">Terms & Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/cookies">Cookie Policy</a></li>
+        </ul>
+      </div>
+  
+      <!-- Social Media Links -->
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/24/4a90e2/facebook-new.png" alt="Facebook">
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/24/4a90e2/twitter.png" alt="Twitter">
+          </a>
+          <a href="https://www.linkedin.com/in/siddhant-tiwari-2998ab296/" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/24/4a90e2/linkedin.png" alt="LinkedIn">
+          </a>
+          <a href="https://instagram.com/texttrove_offical" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/24/4a90e2/instagram-new.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+  
+      <!-- Contact Info -->
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:admin@texttrove.in">admin@texttrove.in</a></p>
+        <p>Phone: +91 6394928238</p>
+        <p>Address: Kushinagar, Uttar Pradesh, INDIA</p>
+      </div>
+    </div>
+  <!-- Footer -->
+  
+    <p>&copy; <%= new Date().getFullYear() %> TextTrove. All rights reserved.</p>
+    <br>
+    <h6>Crafted with &hearts; by Siddhant </h6>
+  </footer>
+
+</body>
+</html>

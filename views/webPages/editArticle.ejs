@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Article</title>
+    <!-- Quill CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Title */
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Buttons */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .save-btn {
+            background-color: #28a745;
+        }
+
+        .save-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+    <!-- Quill JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Edit Article</h2>
+        <form action="/articles/<%= article._id %>?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+
+            <label for="editor">Content:</label>
+            <!-- Quill Editor Container -->
+            <div id="editor" style="height: 200px;"></div>
+
+            <!-- Hidden textarea to store Quill content -->
+            <textarea id="content" name="content" style="display: none;"></textarea>
+
+            <p class="author"><strong>By:</strong> <%= article.author %></p>
+            <p class="created-at"><small>Created at: <%= article.createdAt %></small></p>
+            <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+    </div>
+
+    <!-- Initialize Quill Editor -->
+    <script>
+        // Initialize Quill
+        const quill = new Quill('#editor', {
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline'],
+                    ['link', 'image'],
+                    [{ list: 'ordered' }, { list: 'bullet' }]
+                ]
+            }
+        });
+
+        // Populate Quill with existing content
+        quill.root.innerHTML = `<%- article.content %>`;
+
+        // Copy Quill content to the hidden textarea before submitting the form
+        const form = document.querySelector('form');
+        form.onsubmit = function() {
+            document.getElementById('content').value = quill.root.innerHTML;
+        };
+    </script>
+</body>
+
+</html>

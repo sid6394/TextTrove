@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TextTrove - All Articles</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* General body styling */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #b2b2b2;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header styling */
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 10px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .website-name {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .nav {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav a:hover {
+      color: #ffdd57;
+    }
+
+    /* Main container */
+    .container {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #4a90e2;
+      font-weight: 700;
+      margin-bottom: 30px;
+    }
+
+    /* Articles layout */
+    .article-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .article-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+
+    .article-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .article-title {
+      font-size: 1.5rem;
+      color: #4a90e2;
+      margin-bottom: 10px;
+    }
+
+    .article-meta {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .article-content {
+      color: #444;
+      margin-bottom: 15px;
+    }
+
+    .read-more-btn {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .read-more-btn:hover {
+      background-color: #00347a;
+    }
+
+    /* Footer styling */
+       /* Footer */
+       footer {
+      background-color: #222;
+      color: #f4f4f9;
+      padding: 40px 20px;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+    .footer-brand, .footer-links, .footer-social, .footer-contact {
+      flex: 1;
+      min-width: 220px;
+    }
+    .footer-brand h2, .footer-links h3, .footer-social h3, .footer-contact h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #ffdf5c;
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #f4f4f9;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .footer-links a:hover {
+      color: #ffdf5c;
+    }
+    .social-icons a {
+      margin-right: 15px;
+      transition: transform 0.3s;
+    }
+    .social-icons img {
+      width: 28px;
+      height: 28px;
+    }
+    .social-icons a:hover img {
+      transform: scale(1.1);
+    }
+    .footer-contact p {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin: 5px 0;
+    }
+    .footer-contact a {
+      color: #ffdf5c;
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+    a {
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="website-name">TextTrove</div>
+      <nav class="nav">
+        <a href="/">Home</a>
+        <a href="/quotes">Quotes</a>
+        <a href="/books">Books</a>
+        <a href="/articles">Articles</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="container">
+    <h1>All Articles</h1>
+    <nav>
+      <a href="/write-article" class="read-more-btn">Write a New Article</a>
+    </nav>
+    <br>
+    <div class="article-list">
+      <% if (articles.length > 0) { %>
+      <% articles.forEach(article => { %>
+        <div class="article-card">
+          <h2 class="article-title"><%= article.title %></h2>
+          <p class="article-meta">By: <%= article.author %> | <%= article.createdAt.toDateString() %></p>
+          <p class="article-content"><%- article.content %></p>
+          <form action="/articles/<%= article._id %>" method="get">
+            <button type="submit" class="read-more-btn">Read More</button>
+          </form>
+        </div>
+      <% }); %>
+      <% } else { %>
+        <p class="no-quotes-message">No articles found.</p>
+      <% } %>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>TextTrove</h2>
+        <p>Your gateway to knowledge, insights, and inspiration. Explore quotes, books, and articles from a world of creators.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/quotes">Quotes</a></li>
+          <li><a href="/books">Books</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/terms">Terms & Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/cookies">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://facebook.com"><img src="https://img.icons8.com/ios-filled/24/ffffff/facebook-new.png" alt="Facebook"></a>
+          <a href="https://twitter.com"><img src="https://img.icons8.com/ios-filled/24/ffffff/twitter.png" alt="Twitter"></a>
+          <a href="https://www.linkedin.com/in/siddhant-tiwari-2998ab296/"><img src="https://img.icons8.com/ios-filled/24/ffffff/linkedin.png" alt="LinkedIn"></a>
+          <a href="https://instagram.com/texttrove_offical"><img src="https://img.icons8.com/ios-filled/24/ffffff/instagram-new.png" alt="Instagram"></a>
+        </div>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:admin@texttrove.in">admin@texttrove.in</a></p>
+        <p>Phone: +91 6394928238</p>
+        <p>Address: Kushinagar, Uttar Pradesh, INDIA</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <%= new Date().getFullYear() %> TextTrove. All rights reserved.</p>
+      <p>Crafted with &hearts; by Siddhant</p>
+    </div>
+  </footer>
+</body>
+</html>

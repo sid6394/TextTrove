@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Article</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the body */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #343a40;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Header styling */
+        header {
+            /* background-color: #4a90e2; Navigation bar color updated */
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+/* Navbar */
+.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #4a90e2;
+      padding: 15px 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .navbar .logo a {
+      color: #fff;
+      font-size: 1.8rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .navbar .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+    .navbar .nav-links li a {
+      color: #fff;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .navbar .nav-links li a:hover {
+      color: #ffdf5c;
+    }
+    
+
+ 
+
+        /* Main content container */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Container for the article */
+        .article-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            margin-top: 30px;
+            overflow-wrap: break-word;
+        }
+
+        /* Article title styling */
+        h2 {
+            color: #0056b3;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        /* Author and created date styling */
+        p strong {
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        /* Author text */
+        .author {
+            font-style: italic;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+
+        /* Content styling */
+        .content {
+            margin-bottom: 20px;
+            color: #495057;
+            font-size: 1.1em;
+        }
+
+        /* Created at date */
+        .created-at {
+            font-size: 0.9em;
+            color: #868e96;
+        }
+
+ /* Footer */
+ footer {
+      background-color: #222;
+      color: #f4f4f9;
+      padding: 40px 20px;
+    }
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+    .footer-brand, .footer-links, .footer-social, .footer-contact {
+      flex: 1;
+      min-width: 220px;
+    }
+    .footer-brand h2, .footer-links h3, .footer-social h3, .footer-contact h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: #ffdf5c;
+    }
+    .footer-links ul {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+    .footer-links a {
+      color: #f4f4f9;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    .footer-links a:hover {
+      color: #ffdf5c;
+    }
+    .social-icons a {
+      margin-right: 15px;
+      transition: transform 0.3s;
+    }
+    .social-icons img {
+      width: 28px;
+      height: 28px;
+    }
+    .social-icons a:hover img {
+      transform: scale(1.2);
+    }
+    .footer-contact p {
+      font-size: 0.9rem;
+      color: #bbb;
+      margin: 5px 0;
+    }
+    .footer-contact a {
+      color: #ffdf5c;
+      text-decoration: underline;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: #bbb;
+    }
+    a{
+      text-decoration:none ;
+    }
+  </style>
+
+</head>
+<body>
+ <!-- Navigation Bar -->
+ <header>
+    <nav class="navbar">
+      <div class="logo"><a href="/">TextTrove</a></div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/quotes">Quotes</a></li>
+        <li><a href="/books">Books</a></li>
+        <li><a href="/articles">Articles</a></li>
+        <li><a href="/signup">Sign Up</a></li>
+        <li><a href="/login">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+    <!-- Main content container -->
+    <div class="main-content">
+        <div class="article-container">
+            <p class="content"><%- article.content %></p>
+            <p class="author"><strong>By:</strong> <%- article.author %></p>
+            <p class="created-at"><small>Created at: <%- article.createdAt %></small></p>
+            <button class="save-btn">
+              <a href="/articles/<%= article._id %>/edit" >Edit</a>
+            </button>
+            <form action="/articles/<%= article._id %>/?_method=delete" method="post" >
+              <button type="submit" class="dan-btn">Delete</button>
+            </form>
+        </div>
+        
+    </div>
+    </div>
+
+   
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h2>TextTrove</h2>
+        <p>Your gateway to knowledge, insights, and inspiration. Explore quotes, books, and articles from a world of creators.</p>
+      </div>
+
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/quotes">Quotes</a></li>
+          <li><a href="/books">Books</a></li>
+          <li><a href="/articles">Articles</a></li>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/terms">Terms & Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+          <li><a href="/cookies">Cookie Policy</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-social">
+        <h3>Follow Us</h3>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank"><img src="https://img.icons8.com/ios-filled/28/4a90e2/facebook-new.png" alt="Facebook"></a>
+          <a href="https://twitter.com" target="_blank"><img src="https://img.icons8.com/ios-filled/28/4a90e2/twitter.png" alt="Twitter"></a>
+          <a href="https://www.linkedin.com/in/siddhant-tiwari-2998ab296/" target="_blank"><img src="https://img.icons8.com/ios-filled/28/4a90e2/linkedin.png" alt="LinkedIn"></a>
+          <a href="https://instagram.com/texttrove_offical" target="_blank"><img src="https://img.icons8.com/ios-filled/28/4a90e2/instagram-new.png" alt="Instagram"></a>
+        </div>
+      </div>
+
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:admin@texttrove.in">admin@texttrove.in</a></p>
+        <p>Phone: +91 6394928238</p>
+        <p>Address: Kushinagar, Uttar Pradesh, INDIA</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <%= new Date().getFullYear() %> TextTrove. All rights reserved.</p>
+      <p>Crafted with ♥ by Siddhant</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #myChart {
+            width: 100%;
+            /* Set width to 100% of the parent container */
+            height: 400px;
+            /* Set a fixed height */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #444;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        /* Dashboard Layout */
+        #myChart {
+            display: block;
+            margin: 20px auto;
+            max-width: 70%;
+            height: 400px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        table thead {
+            background-color: #444;
+            color: #fff;
+        }
+
+        table th,
+        table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            font-size: 18px;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Action Links */
+        table a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        table a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Us Form */
+        h2 {
+            margin-top: 30px;
+            font-size: 24px;
+            color: #555;
+        }
+
+        table th,
+        table td {
+            font-size: 14px;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background-color: #4a90e2;
+            color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar-menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar-menu li {
+            display: inline;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar-menu a:hover {
+            background-color: #555;
+        }
+
+        /* Responsive Navigation Bar */
+        @media (max-width: 768px) {
+            .navbar-menu {
+                display: block;
+                text-align: center;
+            }
+
+            .navbar-menu li {
+                margin-bottom: 10px;
+            }
+        }
+
+
+        /* Responsive Design */
+        @media(max-width: 768px) {
+            #myChart {
+                height: 300px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            table th,
+            table td {
+                padding: 8px 10px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">Admin Dashboard</a>
+            <ul class="navbar-menu">
+                <li><a href="/">Dashboard</a></li>
+                <li><a href="#users">Users</a></li>
+                <li><a href="#articles">Articles</a></li>
+                <li><a href="#quotes">Quotes</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Admin Dashboard -->
+    <h1>Welcome, Admin</h1>
+    <p>Email: <%= user.email %>
+    </p>
+
+    <!-- Display total counts -->
+    <p>Total Users: <%= data.totalUsers %>
+    </p>
+    <p>Total Quotes: <%= data.totalQuotes %>
+    </p>
+    <p>Total Articles: <%= data.totalArticles %>
+    </p>
+    <p>Total Contact Us: <%= data.totalContacts %>
+    </p>
+
+    <hr>
+
+    <!-- Chart.js Container -->
+    <canvas id="myChart" style="width: ; height: 100px;"></canvas>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Users', 'Quotes', 'Articles', 'Contact Us'],
+                datasets: [{
+                    label: 'Total Counts',
+                    data: [<%= data.totalUsers %>, <%= data.totalQuotes %>, <%= data.totalArticles %>,<%= data.totalContacts %> ],
+                    backgroundColor: ['#FF5733', '#33FF57', '#3357FF'], // Color for each bar
+                    borderColor: ['#FF5733', '#33FF57', '#3357FF'], // Optional: border color for each bar
+                    borderWidth: 1 // Optional: border width
+                }]
+            },
+            options: {
+                responsive: true,
+                // maintainAspectRatio: false // This allows the chart to resize based on the canvas size
+            }
+        });
+    </script>
+
+    <hr>
+    <h2>Contact us</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.contacts.forEach(function(contact) { %>
+                <tr>
+                    <td><%- contact.name %></td>
+                    <td>
+                        <%= contact.email %>
+                    </td>
+                    <td>
+                        <%= contact.message %>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <hr>
+    <!-- Users Table -->
+    <h2>Users</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.users.forEach(function(user) { %>
+                <tr>
+                    <td><%- user.username %></td>
+                    <td>
+                        <%= user.email %>
+                    </td>
+                    <td><a href="#">View</a> | <a href="#">Delete</a></td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <hr>
+    <!-- Quotes Table -->
+    <h2>Quotes</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Quote</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.quotes.forEach(function(quote) { %>
+                <tr>
+                    <td><%- quote.quote %></td>
+                    <td>
+                        <%= quote.author %>
+                    </td>
+                    <td><a href="#">View</a> | <a href="#">Delete</a></td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <hr>
+    <!-- Articles Table -->
+    <h2>Articles</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.articles.forEach(function(article) { %>
+                <tr>
+                    <td>
+                        <%= article.title %>
+                    </td>
+                    <td>
+                        <%= article.author %>
+                    </td>
+                    <td><a href="#">View</a> | <a href="#">Delete</a></td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+    <hr>
+</body>
+
+</html>

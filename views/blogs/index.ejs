@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Blogs</title>
+</head>
+<body>
+  <h1>Travel Blogs</h1>
+  <a href="/new-blogs">Write a New Blog</a>
+  <ul>
+    <% blogs.forEach(blog => { %>
+      <li>
+        <h2><a href="/blogs/<%= blog._id %>"><%= blog.title %></a></h2>
+        <% if (blog.image) { %>
+          <img src="<%= blog.image.url %>" alt="<%= blog.title %>" width="300">
+        <% } %>
+        <p><%= blog.content.substring(0, 100) %>...</p>
+      </li>
+    <% }); %>
+  </ul>
+</body>
+</html>
